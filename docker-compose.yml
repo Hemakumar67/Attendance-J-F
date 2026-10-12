@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: attendance_gaps_postgres
+    environment:
+      POSTGRES_DB: attendance_gaps
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./backend/src/db/schema.sql:/docker-entrypoint-initdb.d/01_schema.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Mock OIDC Provider
+  mock-oidc:
+    image: ghcr.io/navikt/mock-oauth2-server:2.1.0
+    container_name: attendance_gaps_oidc
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:

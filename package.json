@@ -1,0 +1,18 @@
+{
+  "name": "attendance-gaps-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "setup": "npm run setup:backend && npm run setup:frontend",
+    "setup:backend": "cd backend && npm install",
+    "setup:frontend": "cd frontend && npm install",
+    "seed": "cd backend && npm run seed",
+    "seed:2000": "cd backend && npm run seed:2000",
+    "test": "cd backend && npm test",
+    "test:frontend": "cd frontend && npm test",
+    "perf": "cd backend && npm run perf",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:frontend": "cd frontend && npm run dev",
+    "start": "cd backend && npm run start"
+  }
+}
